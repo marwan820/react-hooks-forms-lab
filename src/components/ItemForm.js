@@ -1,14 +1,23 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
+import Item from "./Item";
 
-function ItemForm(props,onItemFormSubmit) {
+function ItemForm({onItemFormSubmit,itemForm}) {
+  
+  const newItem = {
+    id: uuid(),
+    name: itemName,
+    category: itemCategory,}
 
+    const newArray = [...itemForm,newItem].map(item => <Item key={item.id} name={item.name}  />)
+
+  // create a new Item with name={} and category{}
 
   return (
     <form className="NewItem" onSubmit={onItemFormSubmit}>
       <label>
         Name:
-        <input type="text" name="name" />
+        <input type="text" name="name" value={itemForm} />
       </label>
 
       <label>

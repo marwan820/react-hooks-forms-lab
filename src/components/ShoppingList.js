@@ -6,12 +6,20 @@ import Item from "./Item";
 function ShoppingList({ items }) {
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [search,setSearchText] = useState("")
-  const [newItem,setNewItem] = useState({items})
+  const [itemForm,setitemForm] = useState("")
 
-  const dataObject = {search,selectedCategory}
 
-  console.log(dataObject)
-  
+console.log(items)
+console.log(itemForm)
+  // items = is the array of objects 
+
+  // const userDataObject = {search,selectedCategory}
+
+   // function addNewItem(newItem){
+   //   // when itemform is submitted 
+   //   // take the user input from form and add it to shopping list{items}
+   //      setitemForm([...items,newItem])
+   //      
   function filteredItems(){ 
     const filterCategory = items.filter((item) => {
       if (selectedCategory === "All") return true;
@@ -26,9 +34,8 @@ function ShoppingList({ items }) {
     return filterInput
   }
 
-  const onItemFormSubmit = () => {  
-    return 
-    setNewItem()
+  const onItemFormSubmit = (e) => { 
+    setitemForm(e.target.value)
   }
   
   const onSearchChange = (event)=>{setSearchText(event.target.value)}
@@ -36,7 +43,7 @@ function ShoppingList({ items }) {
 
    return (
     <div className="ShoppingList">
-      <ItemForm onItemFormSubmit={onItemFormSubmit} props = {items}/>
+      <ItemForm onItemFormSubmit={onItemFormSubmit} props={items} itemForm={itemForm}/>
       <Filter  selectedCategory={selectedCategory} key={Math.floor(Math.random() * 10)} search={search}  onSearchChange={onSearchChange} onCategoryChange={handleCategoryChange} />
       <ul className="Items">
         {filteredItems().map((item) => (
