@@ -1,28 +1,34 @@
-import React from "react";
-import { v4 as uuid } from "uuid";
-import Item from "./Item";
+import React, { useState } from "react";
+import items from "../data/items"
+import { v4 as uuid } from "uuid"
 
-function ItemForm({onItemFormSubmit,itemForm}) {
-  
+function ItemForm({onItemFormSubmit,itemName,categoryForm}) {
   const newItem = {
-    id: uuid(),
-    name: itemName,
-    category: itemCategory,}
+    id:uuid(),
+    name:itemName,
+    category:categoryForm
 
-    const newArray = [...itemForm,newItem].map(item => <Item key={item.id} name={item.name}  />)
+  }
 
-  // create a new Item with name={} and category{}
+  function addElement(object){
+    setItems([...items,object])
+  }
+
+
+
+
+  
 
   return (
-    <form className="NewItem" onSubmit={onItemFormSubmit}>
+    <form   type="submit" className="NewItem" onSubmit={onItemFormSubmit} >
       <label>
         Name:
-        <input type="text" name="name" value={itemForm} />
+        <input type="text" name="name"   value={newItem} />
       </label>
 
       <label>
         Category:
-        <select name="category" value={"Produce"}>
+        <select name="category" value={categoryForm}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>

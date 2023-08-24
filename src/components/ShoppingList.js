@@ -2,24 +2,22 @@ import React, { useState } from "react";
 import ItemForm from "./ItemForm";
 import Filter from "./Filter";
 import Item from "./Item";
+import { v4 as uuid  } from "uuid";
 
-function ShoppingList({ items }) {
+function ShoppingList({ items, setItems }) {
+
+  //States for for searching 
   const [selectedCategory, setSelectedCategory] = useState("All")
-  const [search,setSearchText] = useState("")
-  const [itemForm,setitemForm] = useState("")
+  const [search,setSearch] = useState("")
+
+  // States for submitting form to shopping list 
+  const[itemName,setItemName] = useState("")
+  const[categoryForm,setCategoryform]= useState("Produce")
 
 
-console.log(items)
-console.log(itemForm)
-  // items = is the array of objects 
 
-  // const userDataObject = {search,selectedCategory}
 
-   // function addNewItem(newItem){
-   //   // when itemform is submitted 
-   //   // take the user input from form and add it to shopping list{items}
-   //      setitemForm([...items,newItem])
-   //      
+
   function filteredItems(){ 
     const filterCategory = items.filter((item) => {
       if (selectedCategory === "All") return true;
@@ -34,16 +32,26 @@ console.log(itemForm)
     return filterInput
   }
 
-  const onItemFormSubmit = (e) => { 
-    setitemForm(e.target.value)
-  }
-  
-  const onSearchChange = (event)=>{setSearchText(event.target.value)}
+  function onSearchChange(event){ setSearch(event.target.value)}
+ 
   const handleCategoryChange = (event) => {setSelectedCategory(event.target.value)}
+  
+  function onItemFormSubmit(e){ 
+    const newItem = { 
+    id: uuid (),
+    name: setItemName(e.target.value),
+    category: setCategoryform(e.target.value)
+}
 
+const newArray ={...items,newItem}
+    console.log("hello")
+ 
+setItems(newArray)
+
+ }
    return (
     <div className="ShoppingList">
-      <ItemForm onItemFormSubmit={onItemFormSubmit} props={items} itemForm={itemForm}/>
+      <ItemForm onItemFormSubmit={onItemFormSubmit} items={items} itemName={itemName}  categoryForm={categoryForm} />
       <Filter  selectedCategory={selectedCategory} key={Math.floor(Math.random() * 10)} search={search}  onSearchChange={onSearchChange} onCategoryChange={handleCategoryChange} />
       <ul className="Items">
         {filteredItems().map((item) => (
