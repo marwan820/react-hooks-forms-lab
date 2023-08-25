@@ -11,14 +11,11 @@ function ShoppingList({ items, setItems }) {
   const [search,setSearch] = useState("")
 
   // States for submitting form to shopping list 
-  const[itemName,setItemName] = useState("")
-  const[categoryForm,setCategoryform]= useState("Produce")
+  const[itemName,setitemName] = useState("")
+  const[itemCategory,setItemCategory]= useState("Produce")
 
 
-// 5 === 5; // what's the result? True
-// (5 === 5) === true; // what's the result? True
-// 4 === 5; // False
-// (4 === 5 ) === false;
+
 
 
   function filteredItems(){ 
@@ -37,26 +34,37 @@ function ShoppingList({ items, setItems }) {
 
   function onSearchChange(event){setSearch(event.target.value)}
  
-  const handleCategoryChange = (event) => {setSelectedCategory(event.target.value)}
-  
-  function onItemFormSubmit(e){ 
-    e.preventDefault()
-    const newItem = { 
-    id: uuid (),
-    name: setItemName(e.target.value),
-    category: setCategoryform(e.target.value)
-}
+  const handleCategoryChange= (event) => {setSelectedCategory(event.target.value)}
 
-const newArray ={...items,newItem}
+
+
+function onItemFormSubmit(){ 
+  console.log(e)
+    // e.preventDefault()
+    // setitemName(e.target.value)
+    // setItemCategory(e.target.value)
+
+    // const newItem = {
+    //   id: uuid(), // the `uuid` library can be used to generate a unique id
+    //   name: itemName,
+    //   category: itemCategory}
+      
+    //   const newArray = [...items,newItem]
+      
+    //   setItems(newArray)
+
     
- 
-setItems(newArray)
+    
+    }
+    
+  
 
- }
-   return (
+   
+
+return (
     <div className="ShoppingList">
-      <ItemForm onItemFormSubmit={onItemFormSubmit} items={items} itemName={itemName}  categoryForm={categoryForm} />
-      <Filter  selectedCategory={selectedCategory} key={Math.floor(Math.random() * 10)} search={search}  onSearchChange={onSearchChange} onCategoryChange={handleCategoryChange} />
+      <ItemForm onItemFormSubmit={onItemFormSubmit} items={items} itemName={itemName}  itemCategory={itemCategory} />
+      <Filter  selectedCategory={selectedCategory}  search={search}  onSearchChange={onSearchChange} onCategoryChange={handleCategoryChange} />
       <ul className="Items">
         {filteredItems().map((item) => (
           <Item key={item.id} name={item.name} category={item.category} />

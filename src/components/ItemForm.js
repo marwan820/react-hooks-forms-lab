@@ -1,34 +1,16 @@
 import React, { useState } from "react";
-import items from "../data/items"
-import { v4 as uuid } from "uuid"
 
-function ItemForm({onItemFormSubmit,itemName,categoryForm}) {
-  const newItem = {
-    id:uuid(),
-    name:itemName,
-    category:categoryForm
-
-  }
-
-  function addElement(object){
-    setItems([...items,object])
-  }
-
-
-
-
-  
-
+function ItemForm({onItemFormSubmit,itemCategory,itemName}){
   return (
-    <form   type="submit" className="NewItem" onSubmit={onItemFormSubmit} >
+    <form   type="submit" className="NewItem" onSubmit={(e) => {onItemFormSubmit(e)}}>
       <label>
         Name:
-        <input type="text" name="name"   value={newItem} />
+        <input type="text" name="name"   value={itemName} />
       </label>
 
       <label>
         Category:
-        <select name="category" value={categoryForm}>
+        <select name="category" value={itemCategory}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>
@@ -37,7 +19,7 @@ function ItemForm({onItemFormSubmit,itemName,categoryForm}) {
 
       <button type="submit">Add to List</button>
     </form>
-  );
-}
+  )};
+
 
 export default ItemForm;
