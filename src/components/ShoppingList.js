@@ -15,7 +15,10 @@ function ShoppingList({ items, setItems }) {
   const[categoryForm,setCategoryform]= useState("Produce")
 
 
-
+// 5 === 5; // what's the result? True
+// (5 === 5) === true; // what's the result? True
+// 4 === 5; // False
+// (4 === 5 ) === false;
 
 
   function filteredItems(){ 
@@ -27,16 +30,17 @@ function ShoppingList({ items, setItems }) {
     
      const filterInput = filterCategory.filter((item) =>{
     if (search === "") return true
-     return item.name.charAt(0).toUpperCase() === search.charAt(0).toUpperCase()
+     return item.name.toLowerCase().includes(search.toLowerCase())
        })
     return filterInput
   }
 
-  function onSearchChange(event){ setSearch(event.target.value)}
+  function onSearchChange(event){setSearch(event.target.value)}
  
   const handleCategoryChange = (event) => {setSelectedCategory(event.target.value)}
   
   function onItemFormSubmit(e){ 
+    e.preventDefault()
     const newItem = { 
     id: uuid (),
     name: setItemName(e.target.value),
@@ -44,7 +48,7 @@ function ShoppingList({ items, setItems }) {
 }
 
 const newArray ={...items,newItem}
-    console.log("hello")
+    
  
 setItems(newArray)
 
