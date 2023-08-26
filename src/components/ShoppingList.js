@@ -36,10 +36,10 @@ function ShoppingList({ items, setItems }) {
       
       const newArray = [...items,newItem]
       
+      setItems(newArray)
+      
       setitemName("")
       setItemCategory("")
-      
-      setItems(newArray)
     }
 
   

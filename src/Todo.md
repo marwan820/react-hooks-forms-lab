@@ -1,14 +1,14 @@
 # To do list and ideas
 
-[] Add new items to shopping list ({items})
+[x] Add new items to shopping list ({items})
 const variable = e.target 
 
 
-[] When form is submitted, a new item should be created and added to list of items
+[x] When form is submitted, a new item should be created and added to list of items
 
-[] Make all input fields for this form controlled inputs, so  all of form data can be accessed via state
+[x] Make all input fields for this form controlled inputs, so  all of form data can be accessed via state
 
-[] When setting the initial state for the <select> tag, use an initial value of "Produce" (since that's the first option in the list)
+[x] When setting the initial state for the <select> tag, use an initial value of "Produce" (since that's the first option in the list)
 
 [] Handle the form's submit event, and use the data that you have saved in state to create a new item object with the following properties:
 
