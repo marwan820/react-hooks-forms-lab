@@ -14,32 +14,14 @@ function ShoppingList({ items, setItems }) {
   const onSearchChange = (event) => {setSearch(event.target.value)}
   const handleCategoryChange= (event) => {setSelectedCategory(event.target.value)}
   
-  // ItemForm states and setter props 
-  const[itemName,setitemName] = useState("")
-  const[itemCategory,setItemCategory]= useState("Produce")
+  
 
-  const itemInputSubmit = (e) => {
-    e.preventDefault()
-    setitemName(e.target.value)}
+  function onItemFormSubmit(newItem){ 
+  const newArray = [...items,newItem]
+      
+  setItems(newArray)
 
-  const onChangeCategory = (e) => { 
-    e.preventDefault()
-    setItemCategory(e.target.value)}
-
-  function onItemFormSubmit(e){ 
-    e.preventDefault()
-    
-    const newItem = {
-      id: uuid(), 
-      name: itemName,
-      category: itemCategory}
       
-      const newArray = [...items,newItem]
-      
-      setItems(newArray)
-      
-      setitemName("")
-      setItemCategory("")
     }
 
   
@@ -71,7 +53,7 @@ function ShoppingList({ items, setItems }) {
 
 return (
     <div className="ShoppingList">
-      <ItemForm onItemFormSubmit={onItemFormSubmit} itemInputSubmit={itemInputSubmit} itemName={itemName}  itemCategory={itemCategory} onChangeCategory={onChangeCategory} />
+      <ItemForm onItemFormSubmit={onItemFormSubmit}  />
       <Filter  selectedCategory={selectedCategory}  search={search}  onSearchChange={onSearchChange} onCategoryChange={handleCategoryChange} />
       <ul className="Items">
         {filteredItems().map((item) => (

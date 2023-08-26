@@ -20,12 +20,9 @@ const variable = e.target
 
 [] Add the new item to the list by updating state. To get the test passing, you'll need to use a prop called onItemFormSubmit as a callback and pass the new item to it.
 
-[] Note:NOTE: to add a new element to an array in state, it's a good idea to use the spread operator:
+[x] Note:NOTE: to add a new element to an array in state, it's a good idea to use the spread operator:
 
   function addElement(element) {
     setArray([...array, element]);
   }
 The spread operator allows us to copy all the old values of an array into a new array, and then add new elements as well. When you're working with state, it's important to pass a new array to the state setter function instead of mutating the original array.
-
-[] 
-[] 
