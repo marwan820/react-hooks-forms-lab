@@ -5,29 +5,47 @@ import Item from "./Item";
 import { v4 as uuid  } from "uuid";
 
 function ShoppingList({ items, setItems }) {
-
-  //States for for searching 
+  
+  
+  //Filterlist states and setter props
   const [selectedCategory, setSelectedCategory] = useState("All")
   const [search,setSearch] = useState("")
-
-  // States for submitting form to shopping list 
+  
+  const onSearchChange = (event) => {setSearch(event.target.value)}
+  const handleCategoryChange= (event) => {setSelectedCategory(event.target.value)}
+  
+  // ItemForm states and setter props 
   const[itemName,setitemName] = useState("")
   const[itemCategory,setItemCategory]= useState("Produce")
 
+  const itemInputSubmit = (e) => {
+    e.preventDefault()
+    setitemName(e.target.value)}
+
   const onChangeCategory = (e) => { 
     e.preventDefault()
-    setItemCategory(e.target.value) }
+    setItemCategory(e.target.value)}
 
-    const itemInputSubmit = (e) => { setitemName(e.target.value)}
+  function onItemFormSubmit(e){ 
+    e.preventDefault()
+    
+    const newItem = {
+      id: uuid(), 
+      name: itemName,
+      category: itemCategory}
+      
+      const newArray = [...items,newItem]
+      
+      setitemName("")
+      setItemCategory("")
+      
+      setItems(newArray)
+    }
+
   
 
-
-
-    
-
-
-
-  function filteredItems(){ 
+// Shopping List display 
+    function filteredItems(){ 
     const filterCategory = items.filter((item) => {
       if (selectedCategory === "All") return true;
   
@@ -39,32 +57,13 @@ function ShoppingList({ items, setItems }) {
          return item.name.toLowerCase().includes(search.toLowerCase())
          })
     return filterInput
-  }
+     }
 
-  function onSearchChange(event){setSearch(event.target.value)}
- 
-  const handleCategoryChange= (event) => {setSelectedCategory(event.target.value)}
+  
 
 
 
-function onItemFormSubmit(e){ 
-    
 
-    e.preventDefault()
-    
-
-    const newItem = {
-      id: uuid(), // the `uuid` library can be used to generate a unique id
-      name: itemName,
-    category: itemCategory}
-      
-    const newArray = [...items,newItem]
-      
-      setItems(newArray)
-
-    
-    
-    }
     
   
 
