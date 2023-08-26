@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 
-function ItemForm({onItemFormSubmit,itemCategory,itemName}){
+function ItemForm({onItemFormSubmit,itemCategory,itemName,onChangeCategory,itemInputSubmit}){
   return (
-    <form   type="submit" className="NewItem" onSubmit={(e) => {onItemFormSubmit(e)}}>
-      <label>
+    <form   type="submit" className="NewItem" onSubmit={onItemFormSubmit}>
+       <label>
         Name:
-        <input type="text" name="name"   value={itemName} />
-      </label>
+        <input type="text" name="name" onChange={itemInputSubmit} value={itemName} />
+        </label>
 
       <label>
         Category:
-        <select name="category" value={itemCategory}>
+        <select name="category" onChange={onChangeCategory} value={itemCategory}>
           <option value="Produce">Produce</option>
           <option value="Dairy">Dairy</option>
           <option value="Dessert">Dessert</option>

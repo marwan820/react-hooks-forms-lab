@@ -14,7 +14,16 @@ function ShoppingList({ items, setItems }) {
   const[itemName,setitemName] = useState("")
   const[itemCategory,setItemCategory]= useState("Produce")
 
+  const onChangeCategory = (e) => { 
+    e.preventDefault()
+    setItemCategory(e.target.value) }
 
+    const itemInputSubmit = (e) => { setitemName(e.target.value)}
+  
+
+
+
+    
 
 
 
@@ -26,9 +35,9 @@ function ShoppingList({ items, setItems }) {
      }) 
     
      const filterInput = filterCategory.filter((item) =>{
-    if (search === "") return true
-     return item.name.toLowerCase().includes(search.toLowerCase())
-       })
+        if (search === "") return true
+         return item.name.toLowerCase().includes(search.toLowerCase())
+         })
     return filterInput
   }
 
@@ -38,20 +47,20 @@ function ShoppingList({ items, setItems }) {
 
 
 
-function onItemFormSubmit(){ 
-  console.log(e)
-    // e.preventDefault()
-    // setitemName(e.target.value)
-    // setItemCategory(e.target.value)
+function onItemFormSubmit(e){ 
+    
 
-    // const newItem = {
-    //   id: uuid(), // the `uuid` library can be used to generate a unique id
-    //   name: itemName,
-    //   category: itemCategory}
+    e.preventDefault()
+    
+
+    const newItem = {
+      id: uuid(), // the `uuid` library can be used to generate a unique id
+      name: itemName,
+    category: itemCategory}
       
-    //   const newArray = [...items,newItem]
+    const newArray = [...items,newItem]
       
-    //   setItems(newArray)
+      setItems(newArray)
 
     
     
@@ -63,7 +72,7 @@ function onItemFormSubmit(){
 
 return (
     <div className="ShoppingList">
-      <ItemForm onItemFormSubmit={onItemFormSubmit} items={items} itemName={itemName}  itemCategory={itemCategory} />
+      <ItemForm onItemFormSubmit={onItemFormSubmit} itemInputSubmit={itemInputSubmit} itemName={itemName}  itemCategory={itemCategory} onChangeCategory={onChangeCategory} />
       <Filter  selectedCategory={selectedCategory}  search={search}  onSearchChange={onSearchChange} onCategoryChange={handleCategoryChange} />
       <ul className="Items">
         {filteredItems().map((item) => (
